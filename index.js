@@ -76,7 +76,6 @@ let calendar = {
     //new Date()还可以根据传进去的毫秒数得到一个新的日期对象
     for (let i = 0; i < 42; i++) {
       arr[i] = new Date(startDay + i * 24 * 60 * 60 * 1000);
-
     }
     return arr;
   },
@@ -149,10 +148,13 @@ let calendar = {
     for (let i = 0; i < 42; i++) { //42是因为31天最多跨6周*7
       let date = this.showDays[i]; // 拿到当前循环里的日期对象
       let isCur = this.isCur(date); //判断当前日期对象的月份是否与当前展示的月相同
+      // date<=this.date为小于当前日期不可选择，i%7===0为周日不可选择
       template += `<div class = "
       ${isCur.month ? '':'other-month'}
       ${isCur.day ? 'is-today':''}
       ${isCur.select ? 'is-select':''}
+      ${date <= this.date ? 'no-select':''}
+      ${i % 7 === 0 ? 'no-select':''}
     "
     data-index=${i}
       >${date.getDate()}</div>`;
@@ -180,6 +182,8 @@ let calendar = {
     let chooseYear = chooseDate.year;
     let chooseMonth = chooseDate.month;
     let chooseDay = chooseDate.day;
+
+    // console.log(this.getShowDays()[7], "666");
     return {
       month: year === showYear && month === showMthon,
       day: year === todayYear && month === todayMonth && day === todayDay,
@@ -224,19 +228,14 @@ let calendar = {
     let index = dom.dataset.index;
     let date = this.showDays[index];
     let month = date.getMonth();
-    //周日不能选
-    if (index = 0 || index % 7 === 0) {
-      alert("周日不能选择哦~");
-    } else { //选择日期
-      this.chooseDay = this.getChooseDay(date); //得到新选择的日期
-      if (month != this.showDate.month) {
-        this.showDate.month = month;
-        this.showDays = this.getShowDays();
-      }
-      this.showPanel = false; //关闭日期窗口
-      this.getDate(this.chooseDay); //回调函数
-      this.render(); //重新渲染
+    this.chooseDay = this.getChooseDay(date); //得到新选择的日期
+    if (month != this.showDate.month) {
+      this.showDate.month = month;
+      this.showDays = this.getShowDays();
     }
+    this.showPanel = false; //关闭日期窗口
+    this.getDate(this.chooseDay); //回调函数
+    this.render(); //重新渲染
   },
   handleYear: function(dom) {
     let isPrev = dom.getAttribute('class').includes('prev');
