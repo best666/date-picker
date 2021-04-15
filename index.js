@@ -1,3 +1,24 @@
+// 为原型添加日期格式化方法
+Date.prototype.format = function(fmt) {
+  var o = {
+    "M+": this.getMonth() + 1, //月份 
+    "d+": this.getDate(), //日 
+    "h+": this.getHours(), //小时 
+    "m+": this.getMinutes(), //分 
+    "s+": this.getSeconds(), //秒 
+    "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+    "S": this.getMilliseconds() //毫秒 
+  };
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+  }
+  for (var k in o) {
+    if (new RegExp("(" + k + ")").test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    }
+  }
+  return fmt;
+};
 // 对象收编变量
 //el父元素 回调函数返回日期
 //render渲染
@@ -30,6 +51,7 @@ let calendar = {
     this.showDays = this.getShowDays();
     this.chooseDay = this.getChooseDay(this.showDate);
   },
+
   //获取当前年月日
   getYearMonthDay: function(date) {
     let year = date.getFullYear();
@@ -41,6 +63,7 @@ let calendar = {
       day: day,
     }
   },
+
   // 获取每页的日期数组
   getShowDays: function() {
     let arr = [];
@@ -233,4 +256,4 @@ let calendar = {
     this.render(); //重新渲染
 
   }
-}
+};

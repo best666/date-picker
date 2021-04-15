@@ -85,7 +85,7 @@
     calendar.init({
       el: document.getElementById('date-picker'),
       getDate: function(date) {
-        console.log(date);
+        return new Date(date).format("yyyy-MM-dd");
       },
     });
   </script>
