@@ -46,6 +46,7 @@
 /* 日期选择框的父级 */
 
 .calendar {
+  position: relative;
   width: 322px;
   height: 329px;
   margin-top: 5px;
@@ -54,6 +55,7 @@
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   /* 设置为不被选中 */
   user-select: none;
+  z-index: 1;
 }
 
 

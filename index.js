@@ -56,6 +56,7 @@ let calendar = {
   getYearMonthDay: function(date) {
     let year = date.getFullYear();
     let month = date.getMonth();
+    // let day = date.getDay() === 6 ? date.getDate() + 1 : date.getDate();//周六+1
     let day = date.getDate();
     return {
       year: year,
@@ -84,7 +85,12 @@ let calendar = {
     if (date instanceof Date) {
       return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
     }
-    return `${date.year}-${date.month + 1}-${date.day+1}`
+    //判断是周六的话默认天数+2
+    if (new Date(date.year + '-' + (date.month + 1) + '-' + (date.day + 1)).getDay() == 0) {
+      return `${date.year}-${date.month + 1}-${date.day+2}`;
+    } else {
+      return `${date.year}-${date.month + 1}-${date.day+1}`;
+    }
   },
   // 渲染函数
   render: function() {
