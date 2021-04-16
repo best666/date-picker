@@ -84,7 +84,7 @@ let calendar = {
     if (date instanceof Date) {
       return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
     }
-    return `${date.year}-${date.month + 1}-${date.day}`
+    return `${date.year}-${date.month + 1}-${date.day+1}`
   },
   // 渲染函数
   render: function() {
@@ -153,7 +153,7 @@ let calendar = {
       ${isCur.month ? '':'other-month'}
       ${isCur.day ? 'is-today':''}
       ${isCur.select ? 'is-select':''}
-      ${date <= this.date ? 'no-select':''}
+      ${date < this.date ? 'no-select':''}
       ${i % 7 === 0 ? 'no-select':''}
     "
     data-index=${i}
