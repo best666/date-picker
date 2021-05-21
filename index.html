@@ -80,12 +80,16 @@
       </div>
     </div> -->
   </div>
-  <script src="./index.js"></script>
+  <script src="./index1.js"></script>
   <script>
     calendar.init({
       el: document.getElementById('date-picker'),
       getDate: function(date) {
-        return new Date(date).format("yyyy-MM-dd");
+        // console.log(date,'ddate');
+        var date = new Date(date.replace(/-/g,"/"));//即替用符号“/”换掉“-”
+        // console.log(date,'date');
+        console.log(new Date(date).format("yyyy/MM/dd"),666);
+        return new Date(date).format("yyyy/MM/dd");
       },
     });
   </script>

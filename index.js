@@ -102,7 +102,7 @@ let calendar = {
     return `
     <div class="picker-input">
       <span class="picker-prefix"></span>
-      <input type="text" value="${this.chooseDay}">
+      <input type="text" value="${this.chooseDay}" readonly="readonly">
     </div>
     `;
   },
