@@ -20,6 +20,7 @@
   height: 40px;
   line-height: 40px;
   padding: 0 30px;
+  padding-left: 38px;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
   color: #606266;
@@ -32,7 +33,6 @@
 .picker-input .picker-prefix {
   position: absolute;
   left: 5px;
-  display: inline-block;
   width: 25px;
   height: 40px;
   background-image: url(./img/calendar.png);
@@ -170,6 +170,7 @@
 
 .picker-days div.no-select {
   pointer-events: none;
+  cursor: no-drop;
   color: #fff;
   background-color: #e4e4e4;
   border-radius: 50%;
